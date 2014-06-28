@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <alloca.h>
 
 namespace bgfx
 {
@@ -76,6 +75,10 @@ namespace bgfx
 
 #include "bgfxplatform.h"
 #include "image.h"
+
+#if !BX_PLATFORM_FREEBSD
+#	include <alloca.h>
+#endif
 
 #define BGFX_CHUNK_MAGIC_CSH BX_MAKEFOURCC('C', 'S', 'H', 0x0)
 #define BGFX_CHUNK_MAGIC_FSH BX_MAKEFOURCC('F', 'S', 'H', 0x2)

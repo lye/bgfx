@@ -119,6 +119,25 @@ function exampleProject(_name, _uuid)
 			"pthread",
 		}
 
+	configuration { "freebsd-*" }
+		links {
+			"X11",
+			"GL",
+			"pthread",
+		}
+
+	-- force a static link in gcc 4.7's libstdc++ for version reasons.
+	configuration { "freebsd-gcc" }
+		linkoptions {
+			"-L/usr/local/lib/gcc47",
+		}
+		links {
+			"stdc++",
+			"GLEW",
+		}
+		defines {
+		}
+
 	configuration { "osx" }
 		files {
 			BGFX_DIR .. "examples/common/**.mm",

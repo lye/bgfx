@@ -236,7 +236,11 @@ int fons__tt_getGlyphKernAdvance(struct FONSttFontImpl *font, int glyph1, int gl
 static void* fons__tmpalloc(size_t size, void* up);
 static void fons__tmpfree(void* ptr, void* up);
 #else
-#	include <malloc.h>
+#	ifdef __FreeBSD__
+#		include <stdlib.h>
+#	else
+#		include <malloc.h>
+#	endif
 #	include <string.h>
 #endif // 0
 

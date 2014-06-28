@@ -3217,7 +3217,7 @@ BGFX_C_API void bgfx_ios_set_eagl_layer(void* _layer)
 	bgfx::iosSetEaglLayer(_layer);
 }
 
-#elif BX_PLATFORM_LINUX
+#elif BX_PLATFORM_LINUX || BX_PLATFORM_FREEBSD
 BGFX_C_API void bgfx_x11_set_display_window(::Display* _display, ::Window _window)
 {
 	bgfx::x11SetDisplayWindow(_display, _window);
