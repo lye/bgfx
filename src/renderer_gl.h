@@ -8,7 +8,7 @@
 
 #define BGFX_USE_EGL (BGFX_CONFIG_RENDERER_OPENGLES && (BX_PLATFORM_ANDROID || BX_PLATFORM_EMSCRIPTEN || BX_PLATFORM_QNX || BX_PLATFORM_WINDOWS) )
 #define BGFX_USE_WGL (BGFX_CONFIG_RENDERER_OPENGL && BX_PLATFORM_WINDOWS)
-#define BGFX_USE_GL_DYNAMIC_LIB (BX_PLATFORM_LINUX || BX_PLATFORM_OSX || BX_PLATFORM_WINDOWS)
+#define BGFX_USE_GL_DYNAMIC_LIB (BX_PLATFORM_LINUX || BX_PLATFORM_OSX || BX_PLATFORM_WINDOWS || BX_PLATFORM_FREEBSD)
 
 #if BGFX_CONFIG_RENDERER_OPENGL
 #	if BGFX_CONFIG_RENDERER_OPENGL >= 31
@@ -22,6 +22,10 @@
 #			define GL_GLEXT_LEGACY
 #			include <GL/gl.h>
 #			undef GL_PROTOTYPES
+#		elif BX_PLATFORM_FREEBSD
+#			define GL_GLEXT_LEGACY
+#			include <GL/gl.h>
+#			define glInsertEventMarker glInsertEventMarkerEXT
 #		elif BX_PLATFORM_OSX
 #			define GL_GLEXT_LEGACY
 #			define long ptrdiff_t
@@ -489,6 +493,8 @@ typedef uint64_t GLuint64;
 #elif BX_PLATFORM_WINDOWS
 #	include <windows.h>
 #elif BX_PLATFORM_LINUX
+#	include "glcontext_glx.h"
+#elif BX_PLATFORM_FREEBSD
 #	include "glcontext_glx.h"
 #elif BX_PLATFORM_OSX
 #	include "glcontext_nsgl.h"
